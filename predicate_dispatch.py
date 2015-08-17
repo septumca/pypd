@@ -51,15 +51,15 @@ if __name__ == "__main__":
     def foo(v):
         return 'default'
 
-    @predicate(lambda x: x==1)
+    @predicate(lambda v: v==1)
     def foo(v):
         return 'f1'
 
-    @predicate(lambda x: x==2)
+    @predicate(lambda v: v==2)
     def foo(v):
         return 'f2'
 
-    @predicate(lambda x: x==3)
+    @predicate(lambda v: v==3)
     def foo(v):
         return 'f3'
 
@@ -85,12 +85,15 @@ if __name__ == "__main__":
 
     assert factorial(1) == 1
     assert factorial(5) == 120
+    assert foo(v=1) == 'f1'
     assert foo(1) == 'f1'
     assert foo(2) == 'f2'
     assert foo(3) == 'f3'
     assert foo('x') == 'default'
     assert foo_multiple(4, 5) == False
     assert foo_multiple(3, 2) == True
+    assert foo_multiple(x=3, y=3) == False
+    assert foo_multiple(3, y=2) == True
 
     try:
         bar(2)
